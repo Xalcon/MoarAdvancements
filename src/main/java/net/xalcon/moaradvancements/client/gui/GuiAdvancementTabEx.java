@@ -6,7 +6,11 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.advancements.AdvancementTabType;
 import net.minecraft.client.gui.advancements.GuiAdvancementTab;
 import net.minecraft.client.gui.advancements.GuiScreenAdvancements;
+import net.minecraft.client.renderer.ItemMeshDefinition;
 import net.minecraft.client.renderer.RenderItem;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.client.model.ModelLoader;
 
 import javax.annotation.Nullable;
 
