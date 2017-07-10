@@ -59,20 +59,22 @@ public class GuiAdvancementTabEx extends GuiAdvancementTab
 	@Override
 	public void drawTab(int p_191798_1_, int p_191798_2_, boolean p_191798_3_)
 	{
-		if(this.screen.getSelectedPage() == this.page)
-			super.drawTab(p_191798_1_, p_191798_2_, p_191798_3_);
+		if(this.screen.selectedPage != this.page) return;
+		super.drawTab(p_191798_1_, p_191798_2_, p_191798_3_);
 	}
 
 	@Override
 	public void drawIcon(int p_191796_1_, int p_191796_2_, RenderItem p_191796_3_)
 	{
-		if(this.screen.getSelectedPage() == this.page)
-			super.drawIcon(p_191796_1_, p_191796_2_, p_191796_3_);
+		if(this.screen.selectedPage != this.page) return;
+		super.drawIcon(p_191796_1_, p_191796_2_, p_191796_3_);
 	}
 
 	@Override
 	public boolean isMouseOver(int p_191793_1_, int p_191793_2_, int p_191793_3_, int p_191793_4_)
 	{
-		return this.screen.getSelectedPage() == this.page && super.isMouseOver(p_191793_1_, p_191793_2_, p_191793_3_, p_191793_4_);
+
+		if(this.screen.selectedPage != this.page) return false;
+		return super.isMouseOver(p_191793_1_, p_191793_2_, p_191793_3_, p_191793_4_);
 	}
 }

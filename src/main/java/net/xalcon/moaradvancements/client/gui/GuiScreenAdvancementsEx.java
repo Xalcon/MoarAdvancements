@@ -16,7 +16,5 @@ public class GuiScreenAdvancementsEx extends GuiScreenAdvancements
 		super(clientAdvancementManager);
 	}
 
-	private int selectedPage = 0;
-
-	public int getSelectedPage() { return this.selectedPage; }
+	public int selectedPage = 0;
 }

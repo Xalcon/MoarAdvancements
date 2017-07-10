@@ -19,7 +19,7 @@ public class GuiScreenAdvancementsPatcher
         cr.accept(cn, 0);
 
         // add 'public int selectedPage = 0;' to class
-        cn.fields.add(new FieldNode(ACC_PUBLIC/* | ACC_SYNTHETIC*/, "selectedPageX", "I", null, 1));
+        cn.fields.add(new FieldNode(ACC_PUBLIC/* | ACC_SYNTHETIC*/, "selectedPage", "I", null, 1));
 
         // add super.drawScreen() in between
         MethodNode mn = cn.methods.stream().filter(m -> "drawScreen".equals(m.name)).findFirst().orElse(null);

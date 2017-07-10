@@ -142,6 +142,130 @@ public class GuiAdvancementTabPatcher
             mv.visitEnd();
         }
 
+        // patch drawTab
+        {
+            cn.methods.remove(cn.methods.stream().filter(m -> m.name.equals("drawTab")).findFirst().orElse(null));
+            MethodVisitor mv = cn.visitMethod(ACC_PUBLIC, "drawTab", "(IIZ)V", null, null);
+            mv.visitCode();
+            Label l0 = new Label();
+            mv.visitLabel(l0);
+            //mv.visitLineNumber(62, l0);
+            mv.visitVarInsn(ALOAD, 0);
+            mv.visitFieldInsn(GETFIELD, "net/minecraft/client/gui/advancements/GuiAdvancementTab", "screen", "Lnet/minecraft/client/gui/advancements/GuiScreenAdvancements;");
+            mv.visitFieldInsn(GETFIELD, "net/minecraft/client/gui/advancements/GuiScreenAdvancements", "selectedPage", "I");
+            mv.visitVarInsn(ALOAD, 0);
+            mv.visitFieldInsn(GETFIELD, "net/minecraft/client/gui/advancements/GuiAdvancementTab", "page", "I");
+            Label l1 = new Label();
+            mv.visitJumpInsn(IF_ICMPEQ, l1);
+            mv.visitInsn(RETURN);
+            mv.visitLabel(l1);
+            //mv.visitLineNumber(63, l1);
+            mv.visitFrame(F_SAME, 0, null, 0, null);
+            mv.visitVarInsn(ALOAD, 0);
+            mv.visitFieldInsn(GETFIELD, "net/minecraft/client/gui/advancements/GuiAdvancementTab", "type", "Lnet/minecraft/client/gui/advancements/AdvancementTabType;");
+            mv.visitVarInsn(ALOAD, 0);
+            mv.visitVarInsn(ILOAD, 1);
+            mv.visitVarInsn(ILOAD, 2);
+            mv.visitVarInsn(ILOAD, 3);
+            mv.visitVarInsn(ALOAD, 0);
+            mv.visitFieldInsn(GETFIELD, "net/minecraft/client/gui/advancements/GuiAdvancementTab", "index", "I");
+            mv.visitMethodInsn(INVOKEVIRTUAL, "net/minecraft/client/gui/advancements/AdvancementTabType", "draw", "(Lnet/minecraft/client/gui/Gui;IIZI)V", false);
+            Label l2 = new Label();
+            mv.visitLabel(l2);
+            //mv.visitLineNumber(64, l2);
+            mv.visitInsn(RETURN);
+            Label l3 = new Label();
+            mv.visitLabel(l3);
+            mv.visitLocalVariable("this", "Lnet/minecraft/client/gui/advancements/GuiAdvancementTab;", null, l0, l3, 0);
+            mv.visitLocalVariable("p_191798_1_", "I", null, l0, l3, 1);
+            mv.visitLocalVariable("p_191798_2_", "I", null, l0, l3, 2);
+            mv.visitLocalVariable("p_191798_3_", "Z", null, l0, l3, 3);
+            mv.visitMaxs(4, 4);
+            mv.visitEnd();
+        }
+
+        // path drawIcon
+        {
+            cn.methods.remove(cn.methods.stream().filter(m -> m.name.equals("drawIcon")).findFirst().orElse(null));
+            MethodVisitor mv = cn.visitMethod(ACC_PUBLIC, "drawIcon", "(IILnet/minecraft/client/renderer/RenderItem;)V", null, null);
+            mv.visitCode();
+            Label l0 = new Label();
+            mv.visitLabel(l0);
+            mv.visitLineNumber(69, l0);
+            mv.visitVarInsn(ALOAD, 0);
+            mv.visitFieldInsn(GETFIELD, "net/minecraft/client/gui/advancements/GuiAdvancementTab", "screen", "Lnet/minecraft/client/gui/advancements/GuiScreenAdvancements;");
+            mv.visitFieldInsn(GETFIELD, "net/minecraft/client/gui/advancements/GuiScreenAdvancements", "selectedPage", "I");
+            mv.visitVarInsn(ALOAD, 0);
+            mv.visitFieldInsn(GETFIELD, "net/minecraft/client/gui/advancements/GuiAdvancementTab", "page", "I");
+            Label l1 = new Label();
+            mv.visitJumpInsn(IF_ICMPEQ, l1);
+            mv.visitInsn(RETURN);
+            mv.visitLabel(l1);
+            mv.visitLineNumber(70, l1);
+            mv.visitFrame(F_SAME, 0, null, 0, null);
+            mv.visitVarInsn(ALOAD, 0);
+            mv.visitFieldInsn(GETFIELD, "net/minecraft/client/gui/advancements/GuiAdvancementTab", "type", "Lnet/minecraft/client/gui/advancements/AdvancementTabType;");
+            mv.visitVarInsn(ILOAD, 1);
+            mv.visitVarInsn(ILOAD, 2);
+            mv.visitVarInsn(ALOAD, 0);
+            mv.visitFieldInsn(GETFIELD, "net/minecraft/client/gui/advancements/GuiAdvancementTab", "index", "I");
+            mv.visitVarInsn(ALOAD, 3);
+            mv.visitVarInsn(ALOAD, 0);
+            mv.visitFieldInsn(GETFIELD, "net/minecraft/client/gui/advancements/GuiAdvancementTab", "icon", "Lnet/minecraft/item/ItemStack;");
+            mv.visitMethodInsn(INVOKEVIRTUAL, "net/minecraft/client/gui/advancements/AdvancementTabType", "drawIcon", "(IIILnet/minecraft/client/renderer/RenderItem;Lnet/minecraft/item/ItemStack;)V", false);
+            Label l2 = new Label();
+            mv.visitLabel(l2);
+            mv.visitLineNumber(71, l2);
+            mv.visitInsn(RETURN);
+            Label l3 = new Label();
+            mv.visitLabel(l3);
+            mv.visitLocalVariable("this", "Lnet/minecraft/client/gui/advancements/GuiAdvancementTab;", null, l0, l3, 0);
+            mv.visitLocalVariable("p_191796_1_", "I", null, l0, l3, 1);
+            mv.visitLocalVariable("p_191796_2_", "I", null, l0, l3, 2);
+            mv.visitLocalVariable("p_191796_3_", "Lnet/minecraft/client/renderer/RenderItem;", null, l0, l3, 3);
+            mv.visitMaxs(4, 4);
+            mv.visitEnd();
+        }
+        {
+            cn.methods.remove(cn.methods.stream().filter(m -> m.name.equals("isMouseOver")).findFirst().orElse(null));
+            MethodVisitor mv = cn.visitMethod(ACC_PUBLIC, "isMouseOver", "(IIII)Z", null, null);
+            mv.visitCode();
+            Label l0 = new Label();
+            mv.visitLabel(l0);
+            mv.visitLineNumber(77, l0);
+            mv.visitVarInsn(ALOAD, 0);
+            mv.visitFieldInsn(GETFIELD, "net/minecraft/client/gui/advancements/GuiAdvancementTab", "screen", "Lnet/minecraft/client/gui/advancements/GuiScreenAdvancements;");
+            mv.visitFieldInsn(GETFIELD, "net/minecraft/client/gui/advancements/GuiScreenAdvancements", "selectedPage", "I");
+            mv.visitVarInsn(ALOAD, 0);
+            mv.visitFieldInsn(GETFIELD, "net/minecraft/client/gui/advancements/GuiAdvancementTab", "page", "I");
+            Label l1 = new Label();
+            mv.visitJumpInsn(IF_ICMPEQ, l1);
+            mv.visitInsn(ICONST_0);
+            mv.visitInsn(IRETURN);
+            mv.visitLabel(l1);
+            mv.visitLineNumber(78, l1);
+            mv.visitFrame(F_SAME, 0, null, 0, null);
+            mv.visitVarInsn(ALOAD, 0);
+            mv.visitFieldInsn(GETFIELD, "net/minecraft/client/gui/advancements/GuiAdvancementTab", "type", "Lnet/minecraft/client/gui/advancements/AdvancementTabType;");
+            mv.visitVarInsn(ILOAD, 1);
+            mv.visitVarInsn(ILOAD, 2);
+            mv.visitVarInsn(ALOAD, 0);
+            mv.visitFieldInsn(GETFIELD, "net/minecraft/client/gui/advancements/GuiAdvancementTab", "index", "I");
+            mv.visitVarInsn(ILOAD, 3);
+            mv.visitVarInsn(ILOAD, 4);
+            mv.visitMethodInsn(INVOKEVIRTUAL, "net/minecraft/client/gui/advancements/AdvancementTabType", "isMouseOver", "(IIIII)Z", false);
+            mv.visitInsn(IRETURN);
+            Label l2 = new Label();
+            mv.visitLabel(l2);
+            mv.visitLocalVariable("this", "Lnet/minecraft/client/gui/advancements/GuiAdvancementTab;", null, l0, l2, 0);
+            mv.visitLocalVariable("p_191793_1_", "I", null, l0, l2, 1);
+            mv.visitLocalVariable("p_191793_2_", "I", null, l0, l2, 2);
+            mv.visitLocalVariable("p_191793_3_", "I", null, l0, l2, 3);
+            mv.visitLocalVariable("p_191793_4_", "I", null, l0, l2, 4);
+            mv.visitMaxs(5, 5);
+            mv.visitEnd();
+        }
+
         ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_MAXS | ClassWriter.COMPUTE_FRAMES);
         cn.accept(cw);
         dump("d:\\dumper\\GuiAdvancementTab.class", cw.toByteArray());
