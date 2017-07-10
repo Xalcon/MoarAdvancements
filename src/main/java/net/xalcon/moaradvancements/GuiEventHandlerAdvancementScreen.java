@@ -12,7 +12,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import java.lang.reflect.Field;
 
 @Mod.EventBusSubscriber
-public class GuiHandlerAdvancementScreen
+public class GuiEventHandlerAdvancementScreen
 {
     private final static int GUI_WIDTH = 252;
     private final static int GUI_HEIGHT = 140;
@@ -61,7 +61,6 @@ public class GuiHandlerAdvancementScreen
         {
             try
             {
-                int m = event.getButton().id == 0 ? -1 : 1;
                 Field field = GuiScreenAdvancements.class.getDeclaredField("selectedPage");
                 int maxPages = (((GuiScreenAdvancements) event.getGui()).tabs.size() / AdvancementTabType.MAX_TABS) + 1;
                 int page = (int) field.get(event.getGui());
