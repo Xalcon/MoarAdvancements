@@ -13,6 +13,7 @@ public class MAClassTransformer implements IClassTransformer
             return GuiScreenAdvancementsPatcher.patchClass(basicClass);
         else if("net.minecraft.client.gui.advancements.GuiAdvancementTab".equals(transformedName))
             return GuiAdvancementTabPatcher.patchClass(basicClass);
+
         return basicClass;
     }
 }

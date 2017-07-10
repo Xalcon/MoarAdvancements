@@ -19,11 +19,16 @@ public class GuiAdvancementTabEx extends GuiAdvancementTab
 	private int page;
 	private GuiScreenAdvancementsEx screen;
 
-	public GuiAdvancementTabEx(Minecraft mc, GuiScreenAdvancementsEx screen, AdvancementTabType tabType, int index, Advancement advancement, DisplayInfo display, int page)
+	public GuiAdvancementTabEx(Minecraft mc, GuiScreenAdvancements screen, AdvancementTabType tabType, int index, Advancement advancement, DisplayInfo display)
 	{
 		super(mc, screen, tabType, index, advancement, display);
+	}
+
+	public GuiAdvancementTabEx(Minecraft mc, GuiScreenAdvancements screen, AdvancementTabType tabType, int index, Advancement advancement, DisplayInfo display, int page)
+	{
+		this(mc, screen, tabType, index, advancement, display);
 		this.page = page;
-		this.screen = screen;
+		this.screen = (GuiScreenAdvancementsEx)screen;
 	}
 
 	@Nullable

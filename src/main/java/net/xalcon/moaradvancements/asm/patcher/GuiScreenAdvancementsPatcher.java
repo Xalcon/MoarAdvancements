@@ -1,9 +1,7 @@
 package net.xalcon.moaradvancements.asm.patcher;
 
 import org.objectweb.asm.ClassReader;
-import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.ClassWriter;
-import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.tree.*;
 
 import java.io.FileOutputStream;
@@ -48,9 +46,23 @@ public class GuiScreenAdvancementsPatcher
             index++;
         }
 
+        MethodNode mn2 = cn.methods.stream().filter(m -> "rootAdvancementAdded".equals(m.name)).findFirst().orElse(null);
+        for(AbstractInsnNode node = mn2.instructions.getFirst(); node.getNext() != null; node = node.getNext())
+        {
+            if(node instanceof MethodInsnNode)
+            {
+                MethodInsnNode mNode = (MethodInsnNode) node;
+                if("create".equals(mNode.name))
+                {
+                    mNode.name = "createEx";
+                    break;
+                }
+            }
+        }
+
         ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_MAXS | ClassWriter.COMPUTE_FRAMES);
         cn.accept(cw);
-        //dump("d:\\dumper\\GuiScreenAdvancements.class", cw.toByteArray());
+        dump("d:\\dumper\\GuiScreenAdvancements.class", cw.toByteArray());
 
         return cw.toByteArray();
     }
