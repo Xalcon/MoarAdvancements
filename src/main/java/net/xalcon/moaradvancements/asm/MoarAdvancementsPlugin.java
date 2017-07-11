@@ -5,6 +5,9 @@ import net.minecraftforge.fml.relauncher.IFMLLoadingPlugin;
 import javax.annotation.Nullable;
 import java.util.Map;
 
+@IFMLLoadingPlugin.SortingIndex(1001)
+@IFMLLoadingPlugin.Name("MoadAdvancements:Core")
+//@IFMLLoadingPlugin.TransformerExclusions("net.xalcon.moaradvancements.*")
 public class MoarAdvancementsPlugin implements IFMLLoadingPlugin
 {
     @Override

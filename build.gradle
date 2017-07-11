@@ -85,6 +85,7 @@ processResources {
 jar {
 	manifest {
         attributes 'FMLCorePlugin': "net.xalcon.moaradvancements.asm.MoarAdvancementsPlugin"
+        attributes 'FMLCorePluginContainsFMLMod': "true"
 	    attributes 'FMLAT': 'moaradvancements_at.cfg'
 	}
 }
