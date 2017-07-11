@@ -1,9 +1,13 @@
 # MoarAdvancements
-[WIP] Replaces the advancements screen with a new gui that supports multiple pages for advancements
+Replaces the advancements screen with a new gui that supports multiple pages for advancements
 
 ## Why?
 The vanilla advancement screen only supports 26 advancement tabs. Thats why :P
 
+## Disclaimer
+This mod consists of 2 parts that are bundled into one jar. The biggest part is a coremod which is getting assisted by a really small FML mod.
+This means, the mod is currently not compliant to the Forge Coremod Policy! I will work on that as soon as possible, but at the moment, forge does not
+support loading coremods from embedded jars and I dont want to ship the coremod + a single classfile mod separately.
 
 ## How does it work?
 This is a coremod(😱) that modifies the GuiScreenAdvancements class:
