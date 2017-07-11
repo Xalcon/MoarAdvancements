@@ -46,7 +46,8 @@ public class GuiScreenAdvancementsPatcher
             index++;
         }
 
-        /*MethodNode mn2 = cn.methods.stream().filter(m -> "rootAdvancementAdded".equals(m.name)).findFirst().orElse(null);
+        MethodNode mn2 = cn.methods.stream().filter(m -> "rootAdvancementAdded".equals(m.name)).findFirst()
+                .orElseThrow(() -> new RuntimeException("Unable to find method 'rootAdvancementAdded'"));
         for(AbstractInsnNode node = mn2.instructions.getFirst(); node.getNext() != null; node = node.getNext())
         {
             if(node instanceof MethodInsnNode)
@@ -55,10 +56,11 @@ public class GuiScreenAdvancementsPatcher
                 if("create".equals(mNode.name))
                 {
                     mNode.name = "createEx";
+                    mNode.owner = "net/xalcon/moaradvancements/asm/gui/GuiAdvancementsTabEx";
                     break;
                 }
             }
-        }*/
+        }
 
         ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_MAXS | ClassWriter.COMPUTE_FRAMES);
         cn.accept(cw);
@@ -67,7 +69,7 @@ public class GuiScreenAdvancementsPatcher
         return cw.toByteArray();
     }
 
-    private static void dump(String path, byte[] data)
+    /*private static void dump(String path, byte[] data)
     {
         try
         {
@@ -78,5 +80,5 @@ public class GuiScreenAdvancementsPatcher
         {
             e.printStackTrace();
         }
-    }
+    }*/
 }
