@@ -3,3 +3,15 @@
 
 ## Why?
 The vanilla advancement screen only supports 26 advancement tabs. Thats why :P
+
+
+## How does it work?
+This is a coremod(😱) that modifies the GuiScreenAdvancements class:
+* Adds a public integer field `selectedPage` to the class which can be set from outside sources (in this case a GuiEvent handler)
+* Patches the `rootAdvancementAdded` method to call `GuiAdvancementsTabEx.createEx()` instead of `GuiAdvancementsTab.create()` which handles the
+calculation of the page and index on the page
+* Patches the `drawScreen()` method to call `super.drawScreen()` to allow the use of buttons on the Gui
+
+The rest of the logic is handled by the `GuiAdvancementsTabEx` which just extends `GuiAdvancementsTab` and adds some paging logic.
+Rendering the paging buttons as well as the switching logic is handled in the `GuiEventHandlerAdvancementScreen`, so I dont have to add more ASM
+patches to the GuiScreenAdvancements class :)

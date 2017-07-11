@@ -19,18 +19,17 @@ public class GuiScreenAdvancementsPatcher
         cr.accept(cn, 0);
 
         // add 'public int selectedPage = 0;' to class
-        cn.fields.add(new FieldNode(ACC_PUBLIC/* | ACC_SYNTHETIC*/, "selectedPage", "I", null, 1));
+        cn.fields.add(new FieldNode(ACC_PUBLIC, "selectedPage", "I", null, 1));
 
-        // add super.drawScreen() in between
-        MethodNode mn = cn.methods.stream().filter(m -> "drawScreen".equals(m.name)).findFirst().orElse(null);
+        // add super.drawScreen() before the call to renderToolTips()
+        MethodNode mn = cn.methods.stream().filter(m -> "drawScreen".equals(m.name)).findFirst()
+                .orElseThrow(() -> new RuntimeException("Unable to find method 'drawScreen'"));
 
-        int index = 0;
-        while(index < mn.instructions.size())
+        for(AbstractInsnNode node = mn.instructions.getFirst(); node.getNext() != null; node = node.getNext())
         {
-            AbstractInsnNode insn = mn.instructions.get(index);
-            if(insn instanceof  MethodInsnNode)
+            if(node instanceof  MethodInsnNode)
             {
-                MethodInsnNode methodInsnNode = (MethodInsnNode) insn;
+                MethodInsnNode methodInsnNode = (MethodInsnNode) node;
                 if("renderToolTips".equals(methodInsnNode.name))
                 {
                     InsnList list = new InsnList();
@@ -43,11 +42,12 @@ public class GuiScreenAdvancementsPatcher
                     break;
                 }
             }
-            index++;
         }
 
+        // we also need to patch the method `rootAdvancementAdded` to call our createEx instead of create
         MethodNode mn2 = cn.methods.stream().filter(m -> "rootAdvancementAdded".equals(m.name)).findFirst()
                 .orElseThrow(() -> new RuntimeException("Unable to find method 'rootAdvancementAdded'"));
+
         for(AbstractInsnNode node = mn2.instructions.getFirst(); node.getNext() != null; node = node.getNext())
         {
             if(node instanceof MethodInsnNode)
@@ -62,23 +62,11 @@ public class GuiScreenAdvancementsPatcher
             }
         }
 
+        // we are done :)
         ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_MAXS | ClassWriter.COMPUTE_FRAMES);
         cn.accept(cw);
-        //dump("d:\\dumper\\GuiScreenAdvancements.class", cw.toByteArray());
 
+        // now crash :3
         return cw.toByteArray();
     }
-
-    /*private static void dump(String path, byte[] data)
-    {
-        try
-        {
-            FileOutputStream fos = new FileOutputStream(path);
-            fos.write(data);
-            fos.close();
-        } catch (IOException e)
-        {
-            e.printStackTrace();
-        }
-    }*/
 }
