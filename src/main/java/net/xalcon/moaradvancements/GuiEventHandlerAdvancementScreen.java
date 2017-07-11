@@ -55,7 +55,7 @@ public class GuiEventHandlerAdvancementScreen
     }
 
     @SubscribeEvent
-    public static void onAction(GuiScreenEvent.ActionPerformedEvent event)
+    public static void onAction(GuiScreenEvent.ActionPerformedEvent.Post event)
     {
         if(event.getGui() instanceof GuiScreenAdvancements && (event.getButton().id == 0 || event.getButton().id == 1))
         {
@@ -70,7 +70,7 @@ public class GuiEventHandlerAdvancementScreen
                     page = (page + 1) % maxPages;
 
                 field.set(event.getGui(), page);
-                event.setCanceled(true);
+                //event.setCanceled(true);
             }
             catch (NoSuchFieldException | IllegalAccessException e)
             {

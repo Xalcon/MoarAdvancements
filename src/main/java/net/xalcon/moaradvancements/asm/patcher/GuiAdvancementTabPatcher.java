@@ -39,7 +39,8 @@ public class GuiAdvancementTabPatcher
             mv.visitEnd();
         }
         {
-            MethodVisitor mv = cn.visitMethod(ACC_PUBLIC + ACC_STATIC, "createEx", "(Lnet/minecraft/client/Minecraft;Lnet/minecraft/client/gui/advancements/GuiScreenAdvancements;ILnet/minecraft/advancements/Advancement;)Lnet/minecraft/client/gui/advancements/GuiAdvancementTab;", null, null);
+            cn.methods.remove(cn.methods.stream().filter(m -> m.name.equals("create")).findFirst().orElse(null));
+            MethodVisitor mv = cn.visitMethod(ACC_PUBLIC + ACC_STATIC, "create", "(Lnet/minecraft/client/Minecraft;Lnet/minecraft/client/gui/advancements/GuiScreenAdvancements;ILnet/minecraft/advancements/Advancement;)Lnet/minecraft/client/gui/advancements/GuiAdvancementTab;", null, null);
             mv.visitCode();
             Label l0 = new Label();
             mv.visitLabel(l0);
@@ -268,7 +269,7 @@ public class GuiAdvancementTabPatcher
 
         ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_MAXS | ClassWriter.COMPUTE_FRAMES);
         cn.accept(cw);
-        dump("d:\\dumper\\GuiAdvancementTab.class", cw.toByteArray());
+        //dump("d:\\dumper\\GuiAdvancementTab.class", cw.toByteArray());
         return cw.toByteArray();
     }
 
