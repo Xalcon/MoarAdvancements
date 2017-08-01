@@ -1,3 +1,7 @@
+# <span style="color:red">THIS PROJECT HAS BEEN MERGED INTO FORGE!</span>
+As of version 1.12 - 14.21.1.2436, this feature is now included in forge. This mod will no longer work
+properly or even cause crashes. This project will only stay up as a reference for other modders.
+
 # MoarAdvancements
 Replaces the advancements screen with a new gui that supports multiple pages for advancements
 
@@ -18,4 +22,4 @@ calculation of the page and index on the page
 
 The rest of the logic is handled by the `GuiAdvancementsTabEx` which just extends `GuiAdvancementsTab` and adds some paging logic.
 Rendering the paging buttons as well as the switching logic is handled in the `GuiEventHandlerAdvancementScreen`, so I dont have to add more ASM
-patches to the GuiScreenAdvancements class :)
+patches to the GuiScreenAdvancements class :)~~
